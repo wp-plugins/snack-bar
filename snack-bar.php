@@ -26,8 +26,8 @@ function snack_bar_menu() {
 		/* add levels for site/network sub menus */
 		$site_parent = 'snack_site';
 		$net_parent = 'snack_network';
-		$wp_admin_bar->add_menu( array( 'id' => $site_parent, 'parent' => $parent, 'title' => __('Site'), 'href' => '', 'meta' => array( 'class' => $class ) ) );
-		$wp_admin_bar->add_menu( array( 'id' => $net_parent, 'parent' => $parent, 'title' => __('Network'), 'href' => '', 'meta' => array( 'class' => $class ) ) );
+		$wp_admin_bar->add_menu( array( 'id' => $site_parent, 'parent' => $parent, 'title' => __('Site'), 'href' => admin_url(), 'meta' => array( 'class' => $class ) ) );
+		$wp_admin_bar->add_menu( array( 'id' => $net_parent, 'parent' => $parent, 'title' => __('Network'), 'href' => network_admin_url(), 'meta' => array( 'class' => $class ) ) );
 		/* add network menu items */
 		$wp_admin_bar->add_menu( array( 'id' => 'net_plugins', 'parent' => $net_parent, 'title' => __('Plugins'), 'href' => network_admin_url( 'plugins.php' ), 'meta' => array( 'class' => $class ) ) );
 		$wp_admin_bar->add_menu( array( 'id' => 'net_settings', 'parent' => $net_parent, 'title' => __('Settings'), 'href' => network_admin_url( 'settings.php' ), 'meta' => array( 'class' => $class ) ) );
