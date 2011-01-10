@@ -73,10 +73,9 @@ add_action( 'admin_bar_menu', 'snack_bar_menu', 1000 );
 
 function snack_bar_menu_init() {
 	if ( ! is_super_admin() || ! is_admin_bar_showing() )
-	return;
+		return;
 
 	$suffix = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '.dev' : '';
 	wp_enqueue_style( 'snack-bar', WP_PLUGIN_URL . "/snack-bar/snack-bar$suffix.css", array(), '20101112' );
-	wp_enqueue_script( 'snack-bar', WP_PLUGIN_URL . "/snack-bar/snack-bar$suffix.js", array(), '20101109' );
 }
 add_action('admin_bar_init', 'snack_bar_menu_init');
