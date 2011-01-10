@@ -18,6 +18,7 @@ function snack_bar_menu() {
 
 	/* Add the main siteadmin menu item */
 	$site_parent = $parent = 'snack';
+	// TODO: Consider the pi symbol for snacks to go with the name - &#1083;
 	$wp_admin_bar->add_menu( array( 'id' => $parent, 'title' => __('Snacks'), 'href' => '', 'meta' => array( 'class' => $class ) ) );
 
 
@@ -41,7 +42,7 @@ function snack_bar_menu() {
 
 	/* some more site actions for network admins */
 	if( is_multisite() ) {
-		$wp_admin_bar->add_menu( array( 'id' => 'site_edit', 'parent' => $site_parent, 'title' => __('Edit'), 'href' => network_admin_url( 'site-info.php?id=' . $Wpdb->blogid ), 'meta' => array( 'class' => $class ) ) );
+		$wp_admin_bar->add_menu( array( 'id' => 'site_edit', 'parent' => $site_parent, 'title' => __('Edit'), 'href' => network_admin_url( 'site-info.php?id=' . $wpdb->blogid ), 'meta' => array( 'class' => $class ) ) );
 		if( !is_main_site() ) {
 			$items = array();
 			$blogname = get_option( 'blogname' );
