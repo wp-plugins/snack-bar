@@ -70,8 +70,6 @@ function snack_bar_menu() {
 		$wp_admin_bar->add_menu( array( 'id' => 'site_users', 'parent' => $site_parent, 'title' => __('Users'), 'href' => admin_url( 'site-users.php' ), 'meta' => array( 'class' => $class ) ) );
 		$wp_admin_bar->add_menu( array( 'id' => 'site_plugins', 'parent' => $site_parent, 'title' => __('Plugins'), 'href' => admin_url( 'plugins.php' ), 'meta' => array( 'class' => $class ) ) );		
 	}
-	
-	
 }
 add_action( 'admin_bar_menu', 'snack_bar_menu', 1000 );
 
