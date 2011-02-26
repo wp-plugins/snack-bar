@@ -1,4 +1,4 @@
-=== Debug Bar ===
+=== Snack Bar ===
 Contributors: wpmuguru, westi, PeteMall
 Tags: snack
 Tested up to: 3.1
