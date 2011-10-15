@@ -8,7 +8,7 @@
  */
 
 function snack_bar_menu() {
-	global $wp_admin_bar, $wpdb;
+	global $wp_admin_bar, $wpdb, $wp_version;
 
 	if ( ! is_super_admin() || ! is_admin_bar_showing() )
 	return;
@@ -17,8 +17,10 @@ function snack_bar_menu() {
 
 	/* Add the main siteadmin menu item */
 	$site_parent = $parent = 'snack';
-	// TODO: Consider the pi symbol for snacks to go with the name - &#1083;
-	$wp_admin_bar->add_menu( array( 'id' => $parent, 'title' => __('Snacks'), 'href' => '', 'meta' => array( 'class' => $class ) ) );
+	if( is_multisite() && substr( $wp_version, 0, 3 ) == '3.3' )
+		$parent = 'network-admin';
+	else	// TODO: Consider the pi symbol for snacks to go with the name - &#1083;
+		$wp_admin_bar->add_menu( array( 'id' => $parent, 'title' => __('Snacks'), 'href' => '', 'meta' => array( 'class' => $class ) ) );
 
 
 	if ( is_multisite() ) {
