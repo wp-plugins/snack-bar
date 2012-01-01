@@ -17,9 +17,11 @@ function snack_bar_menu() {
 
 	/* Add the main siteadmin menu item */
 	$site_parent = $parent = 'snack';
-	if( is_multisite() && substr( $wp_version, 0, 3 ) == '3.3' )
+	// toolbar?
+	$is_toolbar = version_compare( $wp_version, '3.3', '>=' );
+	if( is_multisite() && $is_toolbar )
 		$parent = 'network-admin';
-	else	// TODO: Consider the pi symbol for snacks to go with the name - &#1083;
+	else
 		$wp_admin_bar->add_menu( array( 'id' => $parent, 'title' => __('Snacks'), 'href' => '', 'meta' => array( 'class' => $class ) ) );
 
 
@@ -27,15 +29,24 @@ function snack_bar_menu() {
 		/* add levels for site/network sub menus */
 		$site_parent = 'snack_site';
 		$net_parent = 'snack_network';
+		if( $is_toolbar ) {
+			$wp_admin_bar->remove_node( 'network-admin-v' );
+			$wp_admin_bar->add_menu( array( 'id' => 'net_themes', 'parent' => $parent, 'title' => __('Themes'), 'href' => network_admin_url( 'themes.php' ), 'meta' => array( 'class' => $class ) ) );
+			$wp_admin_bar->add_menu( array( 'id' => 'net_plugins', 'parent' => $parent, 'title' => __('Plugins'), 'href' => network_admin_url( 'plugins.php' ), 'meta' => array( 'class' => $class ) ) );
+			$wp_admin_bar->add_menu( array( 'id' => 'net_settings', 'parent' => $parent, 'title' => __('Settings'), 'href' => network_admin_url( 'settings.php' ), 'meta' => array( 'class' => $class ) ) );
+			$wp_admin_bar->add_menu( array(	'id' => 'network-admin-v', 'parent' => $parent, 'title' => __( 'Visit Network' ), 'href' => network_home_url() ) );
+		}
 		$wp_admin_bar->add_menu( array( 'id' => $site_parent, 'parent' => $parent, 'title' => __('Site'), 'href' => admin_url(), 'meta' => array( 'class' => $class ) ) );
-		$wp_admin_bar->add_menu( array( 'id' => $net_parent, 'parent' => $parent, 'title' => __('Network'), 'href' => network_admin_url(), 'meta' => array( 'class' => $class ) ) );
 
 		/* add network menu items */
-		$wp_admin_bar->add_menu( array( 'id' => 'net_sites', 'parent' => $net_parent, 'title' => __('Sites'), 'href' => network_admin_url( 'sites.php' ), 'meta' => array( 'class' => $class ) ) );
-		$wp_admin_bar->add_menu( array( 'id' => 'net_users', 'parent' => $net_parent, 'title' => __('Users'), 'href' => network_admin_url( 'users.php' ), 'meta' => array( 'class' => $class ) ) );
-		$wp_admin_bar->add_menu( array( 'id' => 'net_themes', 'parent' => $net_parent, 'title' => __('Themes'), 'href' => network_admin_url( 'themes.php' ), 'meta' => array( 'class' => $class ) ) );
-		$wp_admin_bar->add_menu( array( 'id' => 'net_plugins', 'parent' => $net_parent, 'title' => __('Plugins'), 'href' => network_admin_url( 'plugins.php' ), 'meta' => array( 'class' => $class ) ) );
-		$wp_admin_bar->add_menu( array( 'id' => 'net_settings', 'parent' => $net_parent, 'title' => __('Settings'), 'href' => network_admin_url( 'settings.php' ), 'meta' => array( 'class' => $class ) ) );
+		if( !$is_toolbar ) {
+			$wp_admin_bar->add_menu( array( 'id' => $net_parent, 'parent' => $parent, 'title' => __('Network'), 'href' => network_admin_url(), 'meta' => array( 'class' => $class ) ) );
+			$wp_admin_bar->add_menu( array( 'id' => 'net_sites', 'parent' => $net_parent, 'title' => __('Sites'), 'href' => network_admin_url( 'sites.php' ), 'meta' => array( 'class' => $class ) ) );
+			$wp_admin_bar->add_menu( array( 'id' => 'net_users', 'parent' => $net_parent, 'title' => __('Users'), 'href' => network_admin_url( 'users.php' ), 'meta' => array( 'class' => $class ) ) );
+			$wp_admin_bar->add_menu( array( 'id' => 'net_themes', 'parent' => $net_parent, 'title' => __('Themes'), 'href' => network_admin_url( 'themes.php' ), 'meta' => array( 'class' => $class ) ) );
+			$wp_admin_bar->add_menu( array( 'id' => 'net_plugins', 'parent' => $net_parent, 'title' => __('Plugins'), 'href' => network_admin_url( 'plugins.php' ), 'meta' => array( 'class' => $class ) ) );
+			$wp_admin_bar->add_menu( array( 'id' => 'net_settings', 'parent' => $net_parent, 'title' => __('Settings'), 'href' => network_admin_url( 'settings.php' ), 'meta' => array( 'class' => $class ) ) );
+		}
 
 		/* add site menu items */
 		$wp_admin_bar->add_menu( array( 'id' => 'site_edit', 'parent' => $site_parent, 'title' => __('Edit'), 'href' => network_admin_url( 'site-info.php?id=' . $wpdb->blogid ), 'meta' => array( 'class' => $class ) ) );
