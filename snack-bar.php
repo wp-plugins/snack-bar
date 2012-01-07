@@ -4,7 +4,7 @@
  Plugin URI: http://wordpress.org/extend/plugins/snack-bar/
  Description: Adds a snack menu to the admin bar 
  Author: wpmuguru, westi, PeteMall
- Version: 0.1.1
+ Version: 0.1.2
  */
 
 function snack_bar_menu() {
