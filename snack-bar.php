@@ -4,7 +4,7 @@
  Plugin URI: http://wordpress.org/extend/plugins/snack-bar/
  Description: Adds a snack menu to the admin bar 
  Author: wpmuguru, westi, PeteMall
- Version: 0.1.2
+ Version: 0.1.3
  */
 
 function snack_bar_menu() {
@@ -36,7 +36,8 @@ function snack_bar_menu() {
 			$wp_admin_bar->add_menu( array( 'id' => 'net_settings', 'parent' => $parent, 'title' => __('Settings'), 'href' => network_admin_url( 'settings.php' ), 'meta' => array( 'class' => $class ) ) );
 			$wp_admin_bar->add_menu( array(	'id' => 'network-admin-v', 'parent' => $parent, 'title' => __( 'Visit Network' ), 'href' => network_home_url() ) );
 		}
-		$wp_admin_bar->add_menu( array( 'id' => $site_parent, 'parent' => $parent, 'title' => __('Site'), 'href' => admin_url(), 'meta' => array( 'class' => $class ) ) );
+		$site_name = get_option( 'blogname' );
+		$wp_admin_bar->add_menu( array( 'id' => $site_parent, 'parent' => $parent, 'title' => $site_name ? $site_name : __('Site'), 'href' => admin_url(), 'meta' => array( 'class' => $class ) ) );
 
 		/* add network menu items */
 		if( !$is_toolbar ) {
