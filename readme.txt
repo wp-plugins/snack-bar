@@ -1,7 +1,7 @@
 === Snack Bar ===
 Contributors: wpmuguru, westi, PeteMall
 Tags: snack
-Tested up to: 3.5
+Tested up to: 4.3
 Requires at least: 3.1
 Stable Tag: 0.1.3
 
